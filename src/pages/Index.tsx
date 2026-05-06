@@ -11,6 +11,7 @@ type Myth = {
   image: string;
   fullStory: string;
   facts: string[];
+  gallery: string[];
 };
 
 const MYTHS: Myth[] = [
@@ -31,6 +32,11 @@ const MYTHS: Myth[] = [
       "Один из ходов якобы вёл от особняка Батюшкина к берегу Иртыша",
       "Городские диггеры насчитали более 20 точек входа в исторической части",
     ],
+    gallery: [
+      "https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1520637836862-4d197d17c55a?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+    ],
   },
   {
     id: "kolchak",
@@ -50,6 +56,11 @@ const MYTHS: Myth[] = [
       "Часть золотого запаса так и не нашли — версии указывают на Омск, Тайгу и Байкал",
       "В 2019 году в здании сняли несколько документальных фильмов про аномалии",
     ],
+    gallery: [
+      "https://images.unsplash.com/photo-1551845728-6820a30c64e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1509248961158-e54f6934749c?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1505158498176-0150297fbd7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+    ],
   },
   {
     id: "ebeity",
@@ -68,6 +79,11 @@ const MYTHS: Myth[] = [
       "Концентрация соли в десять раз выше, чем в среднем море",
       "Грязь Эбейты с 1980-х применяют в санаториях для лечения суставов",
       "Орнитологи фиксируют здесь редкие виды птиц, в том числе фламинго-залётных",
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1500252185289-bd9bdcc52a82?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1473773508845-188df298d2d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1439853949127-fa647821eba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80",
     ],
   },
 ];
@@ -331,6 +347,36 @@ export default function Index() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="mt-6">
+                <h4 className="font-['Unbounded'] uppercase text-xl mb-3">Фото мифа</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {openMyth.gallery.map((src, i) => (
+                    <div key={i} className="relative group border-[3px] border-black overflow-hidden">
+                      <img src={src} alt={`${openMyth.title} ${i + 1}`} className="w-full h-40 object-cover" />
+                      <a
+                        href={src}
+                        download={`${openMyth.id}-${i + 1}.jpg`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute bottom-2 right-2 bg-[var(--primary)] text-white text-[10px] font-extrabold uppercase px-2 py-1 border-[2px] border-black no-underline"
+                      >
+                        Скачать
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href={openMyth.image}
+                  download={`${openMyth.id}-main.jpg`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cta inline-block mt-5 no-underline"
+                  style={{ background: "var(--dark)", color: "white", textDecoration: "none" }}
+                >
+                  ⬇ Скачать обложку
+                </a>
               </div>
             </>
           )}
